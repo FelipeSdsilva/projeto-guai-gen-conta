@@ -81,15 +81,15 @@ public abstract class Conta {
 
         System.out.printf("""
                                 
-                \033[0;100m\u001B[31m*********************************************************** \u001B[0m
-                \033[0;100m\u001B[31m|                      Dados da Conta:                    | \u001B[0m
-                \033[0;100m\u001B[31m*********************************************************** \u001B[0m
-                \033[0;100m\u001B[31m|                                                           \u001B[0m
-                \033[0;100m\u001B[31m|Numero da Conta: %d                                        \u001B[0m
-                \033[0;100m\u001B[31m|Agência: %d                                                \u001B[0m
-                \033[0;100m\u001B[31m|Tipo da Conta: %d                                          \u001B[0m
-                \033[0;100m\u001B[31m|Titular: %s                                                \u001B[0m
-                \033[0;100m\u001B[31m|Saldo:  %.2f                                               \u001B[0m
+               \u001B[31m*********************************************************** \u001B[0m
+               |                      Dados da Conta:                    | 
+               \u001B[31m*********************************************************** \u001B[0m
+               |                                                           
+               | Numero da Conta: %d                                        
+               | Agência: %d                                                
+               | Tipo da Conta: %d                                          
+               | Titular: %s                                                
+               | Saldo:  %.2f                                               
                 """, this.numero, this.agencia, this.tipo, this.titular, this.saldo);
     }
 }
