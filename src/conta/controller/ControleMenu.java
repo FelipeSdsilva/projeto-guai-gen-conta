@@ -32,7 +32,7 @@ public class ControleMenu {
         contas.cadastrar(cp2);
 
 
-        int op, num, agen, tipo, aniver;
+        int op, num, numDest, agen, tipo, aniver;
         String titular;
         float saldo, limite, valor;
 
@@ -99,6 +99,42 @@ public class ControleMenu {
                 }
                 case 4 -> {
                     System.out.println("4 - Atualizar Dados da Conta");
+                    System.out.println("Digite o número da conta: ");
+                    num = sc.nextInt();
+
+                    if (contas.buscarNaCollection(num) != null) {
+
+                        System.out.println("Digite o Numero da Agência: ");
+                        agen = sc.nextInt();
+                        System.out.println("Digite o Nome do Titular: ");
+                        sc.skip("\\R?");
+                        titular = sc.nextLine();
+
+                        System.out.println("Digite o Saldo da Conta (R$): ");
+                        saldo = sc.nextFloat();
+
+                        tipo = contas.retornaTipo(num);
+
+                        switch (tipo) {
+                            case 1 -> {
+                                System.out.println("Digite o Limite de Crédito (R$): ");
+                                limite = sc.nextFloat();
+                                contas.atualizar(new ContaCorrente(num, agen, tipo, titular, saldo, limite));
+                            }
+                            case 2 -> {
+                                System.out.println("Digite o dia do Aniversario da Conta: ");
+                                aniver = sc.nextInt();
+                                contas.atualizar(new ContaPoupanca(num, agen, tipo, titular, saldo, aniver));
+                            }
+                            default -> {
+                                System.out.println("Tipo de conta inválido!");
+                            }
+                        }
+
+                    } else
+                        System.out.println("\nConta não encontrada!");
+
+
                     keyPress();
                 }
                 case 5 -> {
@@ -123,10 +159,31 @@ public class ControleMenu {
                 }
                 case 7 -> {
                     System.out.println("7 - Depositar");
+                    System.out.print("Digite o número da conta: ");
+                    num = sc.nextInt();
+
+                    do {
+                        System.out.print("Digite o valor do saque (R$): ");
+                        valor = sc.nextFloat();
+                    } while (valor <= 0);
+
+                    contas.depositar(num, valor);
                     keyPress();
                 }
                 case 8 -> {
                     System.out.println("8 - Transferir valores entre Contas");
+
+                    System.out.print("Digite o número da conta de origem: ");
+                    num = sc.nextInt();
+                    System.out.print("Digite o número da conta destino: ");
+                    numDest = sc.nextInt();
+
+                    do {
+                        System.out.print("Digite o valor da transferência (R$): ");
+                        valor = sc.nextFloat();
+                    } while (valor <= 0);
+
+                    contas.transferir(num, numDest, valor);
                     keyPress();
                 }
                 default -> {
@@ -136,7 +193,6 @@ public class ControleMenu {
             }
         }
     }
-
 
     public static void keyPress() {
         try {
